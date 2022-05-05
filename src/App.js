@@ -24,26 +24,43 @@ function App() {
     setRightNumber("0");
   };
 
-  const setNumberOne = () => {
-    setLeftNumber("");
-    setLeftNumber(leftNumber + "1");
-  };
+  function handleClickLeft(e) {
+    let newLeftNumber;
+    if (leftNumber.slice(0, 1) === "0" && leftNumber.length >= 1) {
+      newLeftNumber = leftNumber.slice(1);
+    } else {
+      newLeftNumber = leftNumber;
+    }
+    const number = e.target.innerText;
+    setLeftNumber(newLeftNumber + number);
+  }
+
+  function handleClickRight(e) {
+    let newRightNumber;
+    if (rightNumber.slice(0, 1) === "0" && rightNumber.length >= 1) {
+      newRightNumber = rightNumber.slice(1);
+    } else {
+      newRightNumber = rightNumber;
+    }
+    const number = e.target.innerText;
+    setRightNumber(newRightNumber + number);
+  }
 
   return (
     <div className="calculator">
       <div className="panel">
         <p>{leftNumber}</p>
         <div className="numbers">
-          <button onClick={() => setNumberOne()}>1</button>
-          <button onClick={() => setLeftNumber(leftNumber + "2")}>2</button>
-          <button onClick={() => setLeftNumber(leftNumber + "3")}>3</button>
-          <button onClick={() => setLeftNumber(leftNumber + "4")}>4</button>
-          <button onClick={() => setLeftNumber(leftNumber + "5")}>5</button>
-          <button onClick={() => setLeftNumber(leftNumber + "6")}>6</button>
-          <button onClick={() => setLeftNumber(leftNumber + "7")}>7</button>
-          <button onClick={() => setLeftNumber(leftNumber + "8")}>8</button>
-          <button onClick={() => setLeftNumber(leftNumber + "9")}>9</button>
-          <button onClick={() => setLeftNumber(leftNumber + "0")}>0</button>
+          <button onClick={handleClickLeft}>1</button>
+          <button onClick={handleClickLeft}>2</button>
+          <button onClick={handleClickLeft}>3</button>
+          <button onClick={handleClickLeft}>4</button>
+          <button onClick={handleClickLeft}>5</button>
+          <button onClick={handleClickLeft}>6</button>
+          <button onClick={handleClickLeft}>7</button>
+          <button onClick={handleClickLeft}>8</button>
+          <button onClick={handleClickLeft}>9</button>
+          <button onClick={handleClickLeft}>0</button>
           <button onClick={() => setLeftNumber("0")}>Clear</button>
         </div>
       </div>
@@ -61,16 +78,16 @@ function App() {
       <div className="panel">
         <p>{rightNumber}</p>
         <div className="numbers">
-          <button onClick={() => setRightNumber(rightNumber + "1")}>1</button>
-          <button onClick={() => setRightNumber(rightNumber + "2")}>2</button>
-          <button onClick={() => setRightNumber(rightNumber + "3")}>3</button>
-          <button onClick={() => setRightNumber(rightNumber + "4")}>4</button>
-          <button onClick={() => setRightNumber(rightNumber + "5")}>5</button>
-          <button onClick={() => setRightNumber(rightNumber + "6")}>6</button>
-          <button onClick={() => setRightNumber(rightNumber + "7")}>7</button>
-          <button onClick={() => setRightNumber(rightNumber + "8")}>8</button>
-          <button onClick={() => setRightNumber(rightNumber + "9")}>9</button>
-          <button onClick={() => setRightNumber(rightNumber + "0")}>0</button>
+          <button onClick={handleClickRight}>1</button>
+          <button onClick={handleClickRight}>2</button>
+          <button onClick={handleClickRight}>3</button>
+          <button onClick={handleClickRight}>4</button>
+          <button onClick={handleClickRight}>5</button>
+          <button onClick={handleClickRight}>6</button>
+          <button onClick={handleClickRight}>7</button>
+          <button onClick={handleClickRight}>8</button>
+          <button onClick={handleClickRight}>9</button>
+          <button onClick={handleClickRight}>0</button>
           <button onClick={() => setRightNumber("0")}>Clear</button>
         </div>
       </div>
