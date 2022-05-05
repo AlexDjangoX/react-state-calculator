@@ -27,7 +27,7 @@ function App() {
 
   const handleClickLeft = (e) => {
     let newLeftNumber;
-    if (leftNumber.slice(0, 1) === "0" && leftNumber.length >= 1) {
+    if (leftNumber.slice(0, 1) === "0" && leftNumber.length === 1) {
       newLeftNumber = leftNumber.slice(1);
     } else {
       newLeftNumber = leftNumber;
@@ -38,7 +38,7 @@ function App() {
 
   const handleClickRight = (e) => {
     let newRightNumber;
-    if (rightNumber.slice(0, 1) === "0" && rightNumber.length >= 1) {
+    if (rightNumber.slice(0, 1) === "0" && rightNumber.length === 1) {
       newRightNumber = rightNumber.slice(1);
     } else {
       newRightNumber = rightNumber;
@@ -59,6 +59,21 @@ function App() {
     setRightNumber(storedValue);
   };
 
+  const handleClickPointLeft = (e) => {
+    const point = e.target.innerText;
+
+    if (!leftNumber.includes(".")) setLeftNumber(leftNumber + point);
+
+    if (leftNumber === 0) setLeftNumber("0" + point);
+  };
+
+  const handleClickPointRight = (e) => {
+    const point = e.target.innerText;
+    if (!rightNumber.includes(".")) {
+      setRightNumber(rightNumber + point);
+    }
+  };
+
   return (
     <div className="calculator">
       <div className="panel">
@@ -76,6 +91,7 @@ function App() {
           <button onClick={handleClickLeft}>0</button>
           <button onClick={() => setLeftNumber("0")}>Clear</button>
           <button onClick={handleClickRecallLeft}>Recall</button>
+          <button onClick={handleClickPointLeft}>.</button>
         </div>
       </div>
 
@@ -104,6 +120,7 @@ function App() {
           <button onClick={handleClickRight}>0</button>
           <button onClick={() => setRightNumber("0")}>Clear</button>
           <button onClick={handleClickRecallRight}>Recall</button>
+          <button onClick={handleClickPointRight}>.</button>
         </div>
       </div>
       <div className="panel answer">
