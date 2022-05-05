@@ -1,11 +1,12 @@
 import "./App.css";
-import { useState, useReducer } from "react";
+import { useState } from "react";
 
 function App() {
   const [leftNumber, setLeftNumber] = useState("0");
   const [rightNumber, setRightNumber] = useState("0");
   const [symbol, setSymbol] = useState("+");
   const [calculatedTotal, setCalculatedTotal] = useState("0");
+  const [storedValue, setStoredValue] = useState("");
 
   const totalCalculatedValue = () => {
     if (symbol === "+") {
@@ -24,7 +25,7 @@ function App() {
     setRightNumber("0");
   };
 
-  function handleClickLeft(e) {
+  const handleClickLeft = (e) => {
     let newLeftNumber;
     if (leftNumber.slice(0, 1) === "0" && leftNumber.length >= 1) {
       newLeftNumber = leftNumber.slice(1);
@@ -33,9 +34,9 @@ function App() {
     }
     const number = e.target.innerText;
     setLeftNumber(newLeftNumber + number);
-  }
+  };
 
-  function handleClickRight(e) {
+  const handleClickRight = (e) => {
     let newRightNumber;
     if (rightNumber.slice(0, 1) === "0" && rightNumber.length >= 1) {
       newRightNumber = rightNumber.slice(1);
@@ -44,7 +45,19 @@ function App() {
     }
     const number = e.target.innerText;
     setRightNumber(newRightNumber + number);
-  }
+  };
+
+  const handleClickStoreValue = () => {
+    setStoredValue(calculatedTotal);
+  };
+
+  const handleClickRecallLeft = () => {
+    setLeftNumber(storedValue);
+  };
+
+  const handleClickRecallRight = () => {
+    setRightNumber(storedValue);
+  };
 
   return (
     <div className="calculator">
@@ -62,6 +75,7 @@ function App() {
           <button onClick={handleClickLeft}>9</button>
           <button onClick={handleClickLeft}>0</button>
           <button onClick={() => setLeftNumber("0")}>Clear</button>
+          <button onClick={handleClickRecallLeft}>Recall</button>
         </div>
       </div>
 
@@ -89,11 +103,13 @@ function App() {
           <button onClick={handleClickRight}>9</button>
           <button onClick={handleClickRight}>0</button>
           <button onClick={() => setRightNumber("0")}>Clear</button>
+          <button onClick={handleClickRecallRight}>Recall</button>
         </div>
       </div>
       <div className="panel answer">
         <p>{calculatedTotal}</p>
         <div>
+          <button onClick={handleClickStoreValue}>Store Value</button>
           <button onClick={() => totalCalculatedValue()}>=</button>
         </div>
       </div>
